@@ -24,21 +24,27 @@ import RNSystemSounds from 'react-native-system-sounds';
 
 // ...
 
-<Button onPress={() => RNSystemSounds.beep()} title="Play positive beep" />
-
-<Button onPress={() => RNSystemSounds.beep(RNSystemSounds.Beeps.Negative)} title="Play negative beep" />
+<Button
+  title="Play positive beep"
+  onPress={() => RNSystemSounds.beep()}
+/>
 
 <Button
-        onPress={() =>
-          RNSystemSounds.play(
-            Platform.select({
-              android: RNSystemSounds.AndroidSoundIDs.TONE_CDMA_ABBR_ALERT,
-              ios: RNSystemSounds.iOSSoundIDs.AudioToneBusy,
-            })
-          )
-        }
-        title="Play custom system sound"
-      />
+  title="Play negative beep"
+  onPress={() => RNSystemSounds.beep(RNSystemSounds.Beeps.Negative)}
+/>
+
+<Button
+  title="Play custom system sound"
+  onPress={() =>
+    RNSystemSounds.play(
+      Platform.select({
+        android: RNSystemSounds.AndroidSoundIDs.TONE_CDMA_ABBR_ALERT,
+        ios: RNSystemSounds.iOSSoundIDs.AudioToneBusy,
+      })
+    )
+  }     
+/>
 ```
 
 ## Examples
@@ -46,30 +52,30 @@ import RNSystemSounds from 'react-native-system-sounds';
 1. Clone the repository, enter the `example` directory and install dependencies.
 
 ```sh
-$ git clone git@github.com:dashdoc/react-native-system-sounds.git
-$ cd example/
-$ yarn install
+git clone git@github.com:dashdoc/react-native-system-sounds.git
+cd example/
+yarn install
 ```
 
 2. Install iOs Pods,
 
 ```sh
-$ cd ios/
-$ pod install
-$ cd ..
+cd ios/
+pod install
+cd ..
 ```
 
 3. Start bundler.
 
 ```sh
-$ yarn start
+yarn start
 ```
 
 4. On a new terminal, run the app on the `<platform>` of your choice (`ios` or `android`).
 
 ```sh
-$ cd example/
-$ yarn <platform>
+cd example/
+yarn <platform>
 ```
 
 ## Caveats
@@ -78,4 +84,4 @@ This does not work on iOS simulator.
 
 ## License
 
-MIT
+[MIT](LISENCE)
