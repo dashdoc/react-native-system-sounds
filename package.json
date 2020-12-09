@@ -1,0 +1,60 @@
+{
+  "name": "react-native-system-sounds",
+  "title": "React Native System Sounds",
+  "version": "1.0.0",
+  "description": "A module to play system sounds and beeps for react-native apps (no sound files).",
+  "homepage": "https://github.com/Dashdoc/react-native-system-sounds",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "README.md",
+    "index.js",
+    "index.d.ts",
+    "android",
+    "ios",
+    "react-native-system-sounds.podspec"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf lib/* && tsc"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run build; git add lib"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dashdoc/react-native-system-sounds.git",
+    "baseUrl": "https://github.com/Dashdoc/react-native-system-sounds"
+  },
+  "keywords": [
+    "react-native",
+    "ios",
+    "android",
+    "system",
+    "audio",
+    "sound",
+    "sounds",
+    "beep",
+    "beeps"
+  ],
+  "author": {
+    "name": "Dashdoc",
+    "email": "contact@dashdoc.eu"
+  },
+  "license": "MIT",
+  "licenseFilename": "LICENSE",
+  "readmeFilename": "README.md",
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+  "devDependencies": {
+    "@types/react-native": "^0.63.37",
+    "husky": "^4.3.5",
+    "react": "16.11.0",
+    "react-native": "0.62.2",
+    "typescript": "^4.1.2"
+  }
+}
