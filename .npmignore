@@ -1,0 +1,10 @@
+# Examples
+example
+
+# Source files
+src
+
+# Development files
+.prettierrc.js
+metro.config.js
+tsconfig.json
