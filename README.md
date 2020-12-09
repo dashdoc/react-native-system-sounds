@@ -1,4 +1,4 @@
-# react-native-system-sounds
+# @dashdoc/react-native-system-sounds
 
 A module to play system sounds and beeps for React Native on iOS and Android (no sound files).
 
@@ -12,7 +12,7 @@ Built with [react-native-module-init](https://github.com/brodybits/react-native-
 1. Install package from npm
 
 ```sh
-yarn add react-native-system-sounds
+yarn add @dashdoc/react-native-system-sounds
 ```
 
 2. Install iOS Pods
@@ -26,13 +26,13 @@ cd ios && pod install && cd ..
 1. Install package from npm
 
 ```sh
-yarn add react-native-system-sounds
+yarn add @dashdoc/react-native-system-sounds
 ```
 
 2. Link package with react-native link
 
 ```sh
-yarn react-native link react-native-system-sounds
+yarn react-native link @dashdoc/react-native-system-sounds
 ```
 
 3. Install iOS Pods
@@ -44,7 +44,7 @@ cd ios && pod install && cd ..
 ## Usage
 
 ```js
-import RNSystemSounds from 'react-native-system-sounds';
+import RNSystemSounds from '@dashdoc/react-native-system-sounds';
 
 // ...
 
