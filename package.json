@@ -8,8 +8,7 @@
   "types": "lib/index.d.ts",
   "files": [
     "README.md",
-    "index.js",
-    "index.d.ts",
+    "lib",
     "android",
     "ios",
     "react-native-system-sounds.podspec"
