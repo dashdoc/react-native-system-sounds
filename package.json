@@ -1,7 +1,7 @@
 {
   "name": "@dashdoc/react-native-system-sounds",
   "title": "React Native System Sounds",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A module to play system sounds and beeps for React Native on iOS and Android (no sound files).",
   "homepage": "https://github.com/Dashdoc/react-native-system-sounds",
   "main": "lib/index.js",
