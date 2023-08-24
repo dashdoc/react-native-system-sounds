@@ -10,10 +10,11 @@
 //   original location:
 //   - https://github.com/facebook/react-native/blob/0.58-stable/local-cli/templates/HelloWorld/android/app/build.gradle
 
-def DEFAULT_COMPILE_SDK_VERSION = 31
-def DEFAULT_BUILD_TOOLS_VERSION = '31.0.0'
+def DEFAULT_COMPILE_SDK_VERSION = 33
+def DEFAULT_BUILD_TOOLS_VERSION = '33.0.0'
 def DEFAULT_MIN_SDK_VERSION = 21
-def DEFAULT_TARGET_SDK_VERSION = 31
+def DEFAULT_TARGET_SDK_VERSION = 33
+def DEFAULT_NDK_VERSION = "23.1.7779620"
 
 def safeExtGet(prop, fallback) {
     rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
@@ -33,9 +34,19 @@ buildscript {
             mavenCentral()
         }
         dependencies {
-            classpath("com.android.tools.build:gradle:7.2.1")
+            classpath("com.android.tools.build:gradle")
             classpath("com.facebook.react:react-native-gradle-plugin")
             classpath("de.undercouch:gradle-download-task:5.0.1")
+        }
+    }
+    subprojects { project -> 
+        afterEvaluate {
+            if ((project.plugins.hasPlugin('android') || project.plugins.hasPlugin('android-library'))) {
+                android {
+                    compileSdkVersion rootProject.ext.compileSdkVersion
+                    buildToolsVersion rootProject.ext.buildToolsVersion
+                }
+            }
         }
     }
 }
@@ -49,6 +60,7 @@ android {
     defaultConfig {
         minSdkVersion safeExtGet('minSdkVersion', DEFAULT_MIN_SDK_VERSION)
         targetSdkVersion safeExtGet('targetSdkVersion', DEFAULT_TARGET_SDK_VERSION)
+        ndkVersion = safeExtGet('ndkVersion', DEFAULT_NDK_VERSION)
         versionCode 1
         versionName "1.0"
     }
@@ -127,7 +139,7 @@ afterEvaluate { project ->
     // }
 
     task androidSourcesJar(type: Jar) {
-        classifier = 'sources'
+        archiveClassifier = 'sources'
         from android.sourceSets.main.java.srcDirs
         include '**/*.java'
     }

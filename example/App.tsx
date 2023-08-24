@@ -1,8 +1,8 @@
-import * as React from "react";
-import {StyleSheet, View, Button, Platform} from "react-native";
+import React from 'react';
+import { StyleSheet, View, Button, Platform } from "react-native";
 import RNSystemSounds from "react-native-system-sounds";
 
-export default function App() {
+export default function App(): JSX.Element {
   return (
     <View style={styles.container}>
       <Button
