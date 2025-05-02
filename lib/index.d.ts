@@ -1,5 +1,5 @@
 import { AndroidSoundIDs, iOSSoundIDs } from "./constants";
-declare type TSoundId = typeof AndroidSoundIDs[keyof typeof AndroidSoundIDs] | typeof iOSSoundIDs[keyof typeof iOSSoundIDs];
+type TSoundId = typeof AndroidSoundIDs[keyof typeof AndroidSoundIDs] | typeof iOSSoundIDs[keyof typeof iOSSoundIDs];
 declare class RNSystemSounds {
     static AndroidSoundIDs: {
         readonly TONE_CDMA_ABBR_ALERT: 97;
