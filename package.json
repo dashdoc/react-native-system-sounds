@@ -3,24 +3,28 @@
   "title": "React Native System Sounds",
   "version": "1.1.1",
   "description": "A module to play system sounds and beeps for React Native on iOS and Android (no sound files).",
-  "homepage": "https://github.com/Dashdoc/react-native-system-sounds",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "homepage": "https://github.com/Dashdoc/react-native-system-sounds#readme",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "files": [
     "README.md",
-    "lib",
-    "android",
-    "ios",
-    "react-native-system-sounds.podspec"
+    "build",
+    "android/build.gradle",
+    "android/src",
+    "ios/RNSystemSounds.podspec",
+    "ios/RNSystemSoundsModule.swift",
+    "expo-module.config.json"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -rf lib/* && tsc"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run build; git add lib"
-    }
+    "build": "expo-module build",
+    "clean": "expo-module clean",
+    "lint": "expo-module lint",
+    "test": "expo-module test",
+    "prepare": "expo-module prepare",
+    "prepublishOnly": "expo-module prepublishOnly",
+    "expo-module": "expo-module",
+    "open:ios": "xed example/ios",
+    "open:android": "open -a \"Android Studio\" example/android"
   },
   "repository": {
     "type": "git",
@@ -46,14 +50,17 @@
   "licenseFilename": "LICENSE",
   "readmeFilename": "README.md",
   "peerDependencies": {
+    "expo": "*",
     "react": "*",
     "react-native": "*"
   },
   "devDependencies": {
-    "husky": "^4.3.5",
-    "react": "^18.2.0",
-    "react-native": "^0.72.4",
-    "typescript": "^4.8.4"
+    "@types/react": "~19.1.1",
+    "eslint": "^8.57.1",
+    "expo": "^55.0.24",
+    "expo-module-scripts": "^55.0.2",
+    "react-native": "0.83.9",
+    "typescript": "~5.9.2"
   },
   "bugs": {
     "url": "https://github.com/Dashdoc/react-native-system-sounds/issues"

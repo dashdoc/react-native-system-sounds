@@ -3,11 +3,11 @@
 A module to play system sounds and beeps for React Native on iOS and Android (no sound files).
 
 Heavily inspired by [react-native-a-beep](https://github.com/trietho/react-native-a-beep)  
-Built with [react-native-module-init](https://github.com/brodybits/react-native-module-init)
+Built with the [Expo Modules API](https://docs.expo.dev/modules/overview/)
 
 ## Installation
 
-### Mostly automatic install with autolinking (RN > 0.60)
+### Install with Expo Modules autolinking
 
 1. Install package from npm
 
@@ -15,25 +15,7 @@ Built with [react-native-module-init](https://github.com/brodybits/react-native-
 yarn add @dashdoc/react-native-system-sounds
 ```
 
-2. Install iOS Pods
-
-```sh
-cd ios && pod install && cd ..
-```
-
-### Mostly automatic install with react-native link (RN < 0.60)
-
-1. Install package from npm
-
-```sh
-yarn add @dashdoc/react-native-system-sounds
-```
-
-2. Link package with react-native link
-
-```sh
-yarn react-native link @dashdoc/react-native-system-sounds
-```
+2. Make sure Expo Modules are installed in your app. Expo apps already include them. In a bare React Native app, follow Expo's [installing Expo modules guide](https://docs.expo.dev/bare/installing-expo-modules/).
 
 3. Install iOS Pods
 
@@ -99,10 +81,6 @@ yarn start
 cd example/
 yarn <platform>
 ```
-
-## Caveats
-
-This does not work on iOS simulator.
 
 ## License
 
