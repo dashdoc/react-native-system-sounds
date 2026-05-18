@@ -1,14 +1,16 @@
 package com.example;
+import android.content.res.Configuration;
+import expo.modules.ApplicationLifecycleDispatcher;
 
 import android.app.Application;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
-import com.rnsystemsounds.RNSystemSoundsPackage;
+import com.facebook.react.ReactHost;
+import com.facebook.react.ReactNativeApplicationEntryPoint;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
-import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
+import com.facebook.react.defaults.DefaultReactHost;
 import com.facebook.react.defaults.DefaultReactNativeHost;
-import com.facebook.soloader.SoLoader;
 import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
@@ -31,7 +33,7 @@ public class MainApplication extends Application implements ReactApplication {
 
         @Override
         protected String getJSMainModuleName() {
-          return "index";
+          return ".expo/.virtual-metro-entry";
         }
 
         @Override
@@ -40,7 +42,7 @@ public class MainApplication extends Application implements ReactApplication {
         }
 
         @Override
-        protected Boolean isHermesEnabled() {
+        protected boolean isHermesEnabled() {
           return BuildConfig.IS_HERMES_ENABLED;
         }
       };
@@ -51,13 +53,20 @@ public class MainApplication extends Application implements ReactApplication {
   }
 
   @Override
+  public ReactHost getReactHost() {
+    return DefaultReactHost.getDefaultReactHost(getApplicationContext(), getReactNativeHost(), null);
+  }
+
+  @Override
   public void onCreate() {
     super.onCreate();
-    SoLoader.init(this, /* native exopackage */ false);
-    if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
-      // If you opted-in for the New Architecture, we load the native entry point for this app.
-      DefaultNewArchitectureEntryPoint.load();
-    }
-    ReactNativeFlipper.initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+    ReactNativeApplicationEntryPoint.loadReactNative(this);
+    ApplicationLifecycleDispatcher.onApplicationCreate(this);
+  }
+
+  @Override
+  public void onConfigurationChanged(Configuration newConfig) {
+    super.onConfigurationChanged(newConfig);
+    ApplicationLifecycleDispatcher.onConfigurationChanged(this, newConfig);
   }
 }

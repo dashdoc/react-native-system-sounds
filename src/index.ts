@@ -1,11 +1,11 @@
-import {NativeModules, Platform} from "react-native";
-import {AndroidSoundIDs, iOSSoundIDs} from "./constants";
+import { Platform } from "react-native";
 
-const {RNSystemSounds: RNSystemSoundsNativeModule} = NativeModules;
+import RNSystemSoundsNativeModule from "./RNSystemSoundsModule";
+import { AndroidSoundIDs, iOSSoundIDs } from "./constants";
 
 type TSoundId =
-  | typeof AndroidSoundIDs[keyof typeof AndroidSoundIDs]
-  | typeof iOSSoundIDs[keyof typeof iOSSoundIDs];
+  | (typeof AndroidSoundIDs)[keyof typeof AndroidSoundIDs]
+  | (typeof iOSSoundIDs)[keyof typeof iOSSoundIDs];
 
 class RNSystemSounds {
   static AndroidSoundIDs = AndroidSoundIDs;
@@ -37,3 +37,4 @@ class RNSystemSounds {
 }
 
 export default RNSystemSounds;
+export { AndroidSoundIDs, iOSSoundIDs };

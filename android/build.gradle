@@ -1,169 +1,20 @@
-// android/build.gradle
-
-// based on:
-//
-// * https://github.com/facebook/react-native/blob/0.60-stable/template/android/build.gradle
-//   original location:
-//   - https://github.com/facebook/react-native/blob/0.58-stable/local-cli/templates/HelloWorld/android/build.gradle
-//
-// * https://github.com/facebook/react-native/blob/0.60-stable/template/android/app/build.gradle
-//   original location:
-//   - https://github.com/facebook/react-native/blob/0.58-stable/local-cli/templates/HelloWorld/android/app/build.gradle
-
-def DEFAULT_COMPILE_SDK_VERSION = 33
-def DEFAULT_BUILD_TOOLS_VERSION = '33.0.0'
-def DEFAULT_MIN_SDK_VERSION = 21
-def DEFAULT_TARGET_SDK_VERSION = 33
-def DEFAULT_NDK_VERSION = "23.1.7779620"
-
-def safeExtGet(prop, fallback) {
-    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+plugins {
+  id 'com.android.library'
+  id 'expo-module-gradle-plugin'
 }
 
-apply plugin: 'com.android.library'
-// apply plugin: 'maven'
-
-buildscript {
-    // The Android Gradle plugin is only required when opening the android folder stand-alone.
-    // This avoids unnecessary downloads and potential conflicts when the library is included as a
-    // module dependency in an application project.
-    // ref: https://docs.gradle.org/current/userguide/tutorial_using_tasks.html#sec:build_script_external_dependencies
-    if (project == rootProject) {
-        repositories {
-            google()
-            mavenCentral()
-        }
-        dependencies {
-            classpath("com.android.tools.build:gradle")
-            classpath("com.facebook.react:react-native-gradle-plugin")
-            classpath("de.undercouch:gradle-download-task:5.0.1")
-        }
-    }
-    subprojects { project -> 
-        afterEvaluate {
-            if ((project.plugins.hasPlugin('android') || project.plugins.hasPlugin('android-library'))) {
-                android {
-                    compileSdkVersion rootProject.ext.compileSdkVersion
-                    buildToolsVersion rootProject.ext.buildToolsVersion
-                }
-            }
-        }
-    }
-}
-
-apply plugin: 'com.android.library'
-// apply plugin: 'maven'
+group = 'expo.modules.rnsystemsounds'
+version = '1.1.1'
 
 android {
-    compileSdkVersion safeExtGet('compileSdkVersion', DEFAULT_COMPILE_SDK_VERSION)
-    buildToolsVersion safeExtGet('buildToolsVersion', DEFAULT_BUILD_TOOLS_VERSION)
-    defaultConfig {
-        minSdkVersion safeExtGet('minSdkVersion', DEFAULT_MIN_SDK_VERSION)
-        targetSdkVersion safeExtGet('targetSdkVersion', DEFAULT_TARGET_SDK_VERSION)
-        ndkVersion = safeExtGet('ndkVersion', DEFAULT_NDK_VERSION)
-        versionCode 1
-        versionName "1.0"
-    }
-    lintOptions {
-        abortOnError false
-    }
-}
+  namespace "expo.modules.rnsystemsounds"
 
-repositories {
-    maven {
-        // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
-        url("$rootDir/../node_modules/react-native/android")
-    }
-    maven {
-        // Android JSC is installed from npm
-        url("$rootDir/../node_modules/jsc-android/dist")
-    }
-    mavenCentral {
-        // We don't want to fetch react-native from Maven Central as there are
-        // older versions over there.
-        content {
-            excludeGroup "com.facebook.react"
-        }
-    }
-    google()
-    maven { url 'https://www.jitpack.io' }
-}
+  defaultConfig {
+    versionCode 1
+    versionName "1.1.1"
+  }
 
-dependencies {
-    //noinspection GradleDynamicVersion
-    implementation 'com.facebook.react:react-native:+'  // From node_modules
-}
-
-def configureReactNativePom(def pom) {
-    def packageJson = new groovy.json.JsonSlurper().parseText(file('../package.json').text)
-
-    pom.project {
-        name packageJson.title
-        artifactId packageJson.name
-        version = packageJson.version
-        group = "com.rnsystemsounds"
-        description packageJson.description
-        url packageJson.repository.baseUrl
-
-        licenses {
-            license {
-                name packageJson.license
-                url packageJson.repository.baseUrl + '/blob/master/' + packageJson.licenseFilename
-                distribution 'repo'
-            }
-        }
-
-        developers {
-            developer {
-                id packageJson.author.username
-                name packageJson.author.name
-            }
-        }
-    }
-}
-
-afterEvaluate { project ->
-    // some Gradle build hooks ref:
-    // https://www.oreilly.com/library/view/gradle-beyond-the/9781449373801/ch03.html
-    // task androidJavadoc(type: Javadoc) {
-    //     source = android.sourceSets.main.java.srcDirs
-    //     classpath += files(android.bootClasspath)
-    //     project.getConfigurations().getByName('implementation').setCanBeResolved(true)
-    //     classpath += files(project.getConfigurations().getByName('implementation').asList())
-    //     include '**/*.java'
-    // }
-
-    // task androidJavadocJar(type: Jar, dependsOn: androidJavadoc) {
-    //     classifier = 'javadoc'
-    //     from androidJavadoc.destinationDir
-    // }
-
-    task androidSourcesJar(type: Jar) {
-        archiveClassifier = 'sources'
-        from android.sourceSets.main.java.srcDirs
-        include '**/*.java'
-    }
-
-    android.libraryVariants.all { variant ->
-        def name = variant.name.capitalize()
-        def javaCompileTask = variant.javaCompileProvider.get()
-
-        task "jar${name}"(type: Jar, dependsOn: javaCompileTask) {
-            from javaCompileTask.destinationDir
-        }
-    }
-
-    artifacts {
-        archives androidSourcesJar
-        // archives androidJavadocJar
-    }
-
-    // task installArchives(type: Upload) {
-    //     configuration = configurations.archives
-    //     repositories.mavenDeployer {
-    //         // Deploy to react-native-event-bridge/maven, ready to publish to npm
-    //         repository url: "file://${projectDir}/../android/maven"
-    //         configureReactNativePom pom
-    //     }
-    // }
+  lintOptions {
+    abortOnError false
+  }
 }
